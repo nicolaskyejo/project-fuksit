@@ -1,0 +1,12 @@
+{%  extends "story.html" %}
+{% block title %}Mission 1{% endblock %}
+{% block body %}
+    {% block nav %} {{ super() }} {% endblock %}
+{{ username }}
+<img src="https://robohash.org/{{username}}.png" width="32" height="32"> <br>
+
+   <h3>Content for mission 1</h3>
+
+<a href={{ url_for('mission_1') }}>Mission 1</a>
+<a href={{ url_for('mission_2') }}>Mission 2</a>
+{% endblock %}

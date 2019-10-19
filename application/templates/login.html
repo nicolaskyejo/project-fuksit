@@ -1,31 +1,22 @@
 {%  extends "base.html" %}
 {% block title %}Login{% endblock %}
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
-{% endblock %}
 
-
-
-<h1>Log In using Metropolia credentials</h1>
-
-
+{#{% block head %}#}
+{#<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">#}
+{#{% endblock %}#}
 
 {% block body %}
 
 <div class="jumbotron">
-  <h1 class="display-3">Hello, dude!</h1>
-  <p class="lead">Type in your name and start your journey!</p>
+  <h1 class="display-3">Welcome Metropolia student!</h1>
+  <p class="lead">Type in your character name and start your journey!</p>
   <hr class="my-4">
         <form action="/" method="post">
-        <!--Character name: <input type="text" name="username" autofocus autocomplete="off"><br>-->
         <label class="col-form-label">Character name:</label>
-        <input type="text" class="form-control" name="username" placeholder="Type name here">
+        <input type="text" class="form-control" name="username" autofocus autocomplete="off" placeholder="Type name here">
         <button type="submit" class="btn btn-primary">Submit</button>
-        <!--<input type="submit" value="Submit"><br>-->
         </form>
 </div>
-
-
 
 {% endblock %}
 

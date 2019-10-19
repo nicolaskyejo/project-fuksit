@@ -1,1 +1,5 @@
-About the project and 'authors'
+This site was created by Henri Nurmi, Nicolas Kyejo, and Petri Kölhi as an innovation project for the course
+"Innovation Project XX00BH18-3282" in Metropolia University of Applied Sciences during the autumn semester in 2019.
+
+The aim of the project was to create a web app to guide students in their orientation week at school. For further contact or bug reports
+please email any of the authors above (firstname.lastname@metropolia.fi).

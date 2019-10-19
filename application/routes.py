@@ -11,8 +11,7 @@ def login():
         return redirect(url_for('story'))
     if request.method == 'POST':
         username = request.form.get('username')
-        # user = request.form['username']
-        session['username'] = username
+        session['username'] = username  # user = request.form['username']
         return redirect(url_for('story'))
     return render_template('login.html')
 
@@ -32,10 +31,34 @@ def story():
     return render_template('story.html', username=username)
 
 
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
+
+
+@app.route("/profile")  # Edit later to make route correspond to the username
+def profile():
+    username = session['username']
+    return render_template('profile.html', username=username)
+
+
+# Missions aka Content #
+@app.route('/mission_1', methods=['GET', 'POST'])
+def mission_1():
+    """Mission 1 and its contents"""
+    username = session['username']
+    return render_template('mission_1.html', username=username)
+
+
+@app.route('/mission_2', methods=['GET', 'POST'])
+def mission_2():
+    """Mission 2 and its contents"""
+    username = session['username']
+    return render_template('mission_2.html', username=username)
+
+# Error routes #
 @app.errorhandler(404)
 def notfound():
     """404 template"""
     return make_response(render_template('404.html'), 404)
 
-# @app.route('/user/<username>')
-# def profile(username):

@@ -9,7 +9,7 @@ def create_app():
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object('config.DevConfig')
     logging.basicConfig(level=logging.DEBUG)
-    logging.disable(logging.DEBUG)
+    #logging.disable(logging.DEBUG)
     # Initialize Plugins
 
     with app.app_context():
