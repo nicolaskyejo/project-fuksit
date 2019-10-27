@@ -37,7 +37,7 @@ def register():
                 session['username'] = username
                 return redirect(url_for('content_bp.story'))
 
-    return render_template('signup.html', form=SignupForm())
+    return render_template('signup.html', form=signup_form)
 
 
 @auth_bp.route('/', methods=['GET', 'POST'])
@@ -61,7 +61,7 @@ def login():
                         pass
         flash('Invalid Username/Password combination')
         return redirect(url_for('auth_bp.login'))
-    return render_template('login_new.html', form=LoginForm())
+    return render_template('login_new.html', form=login_form)
 
 
 @auth_bp.route('/logout')

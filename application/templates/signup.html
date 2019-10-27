@@ -7,38 +7,66 @@
   <p class="lead">Type in your username/character name and password to create an account</p>
   <p class="text-danger">Do NOT use your Metropolia account credentials!</p>
   <hr class="my-4">
+
     <form method=post>
+        {{ form.hidden_tag() }}
+    <fieldset class="form-group">
         {% for message in get_flashed_messages() %}
-        <div class="alert alert-warning alert-dismissible">
+        <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span>
             </button>
             {{ message }}
         </div>
       {% endfor %}
-        <div class="username">
-        {{ form.username.label }}
-        {{ form.username(placeholder='John Doe') }}
+        <div class="form-group">
+        {{ form.username.label(class="form-control-label") }}
         {% if form.username.errors %}
-          <ul class="errors">
-            {% for error in form.username.errors %}<li>{{ error }}</li>{% endfor %}
-          </ul>
+            {{ form.username(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.username(placeholder='John Doe', class="form-control form-control-lg") }}
         {% endif %}
-         </div>
-        <div class="password">
-            {{ form.password.label }}
-            {{ form.password }}
-            {% if form.password.errors %}
-              <ul class="errors">
-                {% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}
-              </ul>
-            {% endif %}
         </div>
-        <div class="btn btn-primary">
-            <input id="submit" type="submit" value="Submit">
+
+        <div class="form-group">
+        {{ form.password.label(class="form-control-label") }}
+            {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.password(class="form-control form-control-lg") }}
+        {% endif %}
+        </div>
+
+         <div class="form-group">
+         {{ form.confirm_password.label(class="form-control-label") }}
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.confirm_password(class="form-control form-control-lg") }}
+        {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
         </div>
         <div class="loginsignup">
             <span>Already have an account? <a href="{{ url_for('auth_bp.login') }}">Login.</a></span>
         </div>
+    </fieldset>
     </form>
     <script>
       $(document).ready(function() {
@@ -47,6 +75,5 @@
        });
       });
     </script>
-  </div>
-
+</div>
 {% endblock %}
