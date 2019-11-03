@@ -1,9 +1,8 @@
-{%  extends "base.html" %}
+{% extends "base.html" %}
 {% block title %}Story{% endblock %}
-
 {% block head %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/story.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+
 {% endblock %}
 
 {% block body %}
@@ -80,6 +79,8 @@
                 <p style="color:#F39C12">{{ username }}</p>
                 <h4>Avatar:</h4>
                 <img id="robohash" src="https://robohash.org/{{username}}.png" style="display:block;"> <br>
+                <h4>XP:</h4>
+                <p id="points">{{ xp }} </p><br>
 
                     <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -101,7 +102,35 @@
 
     </div>
 
+<button type="button" class="btn btn-success" id="points_button">Briefing Complete</button><br>
+<script>
 
+    $('#points_button').click(function () {
+
+        $.ajax({
+           data:JSON.stringify({points:1,mission:0}),
+           url: "/points",
+           type: "POST",
+           contentType: "application/json",
+           dataType: "json",
+           processData: false,
+           success:function(result) {
+                console.log('POST success')
+                console.log(result.message)
+                setTimeout(function (){
+                    window.location = '{{ url_for('content_bp.mission_1') }}'
+                }, 700);
+           },
+           error: function (error) {
+                console.log('POST fail')
+           }
+        })
+    }
+
+    );
+</script>
 
 {% endblock %}
+
+
 
