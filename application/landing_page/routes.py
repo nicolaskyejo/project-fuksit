@@ -15,22 +15,9 @@ def register():
         if signup_form.validate():
             username = request.form.get('username')
             password = request.form.get('password')
-            existing_user = User.query.filter_by(username=username).all()
+            existing_user = User.query.filter_by(username=username).first()
             if existing_user is None:  # if no users are found, this is a new user
                 user = User(username=username, password=generate_password_hash(password, method='sha256'), admin=False)
-                db.session.add(user)
-                db.session.commit()
-                login_user(user)
-                session['username'] = username
-                return redirect(url_for('content_bp.story'))
-            else:
-                for user in existing_user:
-                    if check_password_hash(user.password, password):
-                        flash('Username/Password is incorrect')
-                        return redirect(url_for('auth_bp.register'))
-                # username is the same but password is different
-                user = User(username=username, password=generate_password_hash(password, method='sha256'),
-                            admin=False)
                 db.session.add(user)
                 db.session.commit()
                 login_user(user)
@@ -38,7 +25,8 @@ def register():
                 session['missions'] = {0: False, 1: False, 2: False}
                 session['username'] = username
                 return redirect(url_for('content_bp.story'))
-
+            flash('Username taken')
+            return redirect(url_for('auth_bp.register'))
     return render_template('signup.html', form=signup_form)
 
 
@@ -51,20 +39,17 @@ def login():
         if login_form.validate():
             username = request.form.get('username')
             password = request.form.get('password')
-            user = User.query.filter_by(username=username).all()
+            user = User.query.filter_by(username=username).first()
             if user:
-                for valid_user in user:
-                    if check_password_hash(valid_user.password, password):
-                        login_user(valid_user)
-                        session['points'] = 0
-                        session['missions'] = {0: False, 1: False, 2: False}
-                        session['username'] = username
-                        next = request.args.get('next')
-                        return redirect(next or url_for('content_bp.story'))
-                    else:
-                        pass
-        flash('Invalid Username/Password combination')
-        return redirect(url_for('auth_bp.login'))
+                if check_password_hash(user.password, password):
+                    login_user(user)
+                    session['points'] = 0
+                    session['missions'] = {0: False, 1: False, 2: False}
+                    session['username'] = username
+                    next = request.args.get('next')
+                    return redirect(next or url_for('content_bp.story'))
+            flash('Invalid Username/Password combination')
+            return redirect(url_for('auth_bp.login'))
     return render_template('login_new.html', form=login_form)
 
 
@@ -94,24 +79,4 @@ def unauthorized():
     """Redirect unauthorized users to Login page."""
     flash('You must be logged in to view that page.')
     return redirect(url_for('auth_bp.login'))
-
-
-# def login():
-#     """The first page of the app"""
-#     # Think about SSO login in case with get permission from Metropolia
-#     if 'username' in session:  # if user is logged in
-#         return redirect(url_for('content_bp.story'))
-#     if request.method == 'POST':
-#         username = request.form.get('username')
-#         session['username'] = username  # user = request.form['username']
-#         return redirect(url_for('content_bp.story'))
-#     return render_template('login.html')
-#
-#
-# @auth_bp.route('/logout', methods=['POST'])
-# def logout():
-#     """Logs out the user by removing session"""
-#     if 'logout' in request.form:
-#         session.pop('username', None)
-#     return redirect(url_for('auth_bp.login'))
 

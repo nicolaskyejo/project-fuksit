@@ -21,18 +21,17 @@ def points():
         return make_response(jsonify({'message': 'invalid mission'}), 200)
     return make_response(jsonify({'error': 'invalid request'}), 400)
 
-    # user_name = request.args.get('username')  # GET
-    # if user_name:
-    #     user_points = session.get('points')
-    #     # validation missing
-    #     return make_response(jsonify({'points': user_points}), 200)
-    # return make_response(jsonify({'error': 'could not process request'}), 400)
-
 
 @content_bp.route('/leaderboard', methods=['GET', 'POST'])
 @login_required
 def leaderboard():
-    pass
+    """GET request returns sorted leaderboard
+    POST request changes leaderboard"""
+    if request.method == 'POST':
+        return jsonify()
+        # to be completed later
+
+    return jsonify()
 
 
 @content_bp.route('/story', methods=['GET'])

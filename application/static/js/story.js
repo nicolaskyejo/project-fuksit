@@ -1,23 +1,21 @@
 $(document).ready(function() {
     $('#robohash').fadeIn(1500);
-    let xp = parseInt($('p#points').html()) * 10;
+    let xp = parseInt($('p#points').html()) * 100;
     $('p#points').html(xp);
 });
 
 // $(function() {
 //    $.ajax(
 //        {
-//            url: "/points?username=testuser",
+//            url: "/leaderboard",
 //            type: "GET",
 //            dataType: "json",
 //            processData: false,
 //            success:function(result) {
-//                 console.log('GET success')
-//                 let xp = result.points * 10;
-//                 $('p#points').text(xp)
+//                 console.log('Leaderboard GET success')
 //            },
 //            error: function (error) {
-//                 console.log('GET fail')
+//                 console.log('Leaderboard GET fail')
 //                 $('p#points').text("0")
 //            }
 //        })

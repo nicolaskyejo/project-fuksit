@@ -8,7 +8,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'fuksit'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), index=False, unique=False, nullable=False)
+    username = db.Column(db.String(40), index=False, unique=True, nullable=False)
     password = db.Column(db.String(200), primary_key=False, unique=False, nullable=False)
     admin = db.Column(db.Boolean, index=False, unique=False, nullable=False)
 
