@@ -1,10 +1,24 @@
 {%  extends "story.html" %}
-{% block title %}About{% endblock %}
-{% block body %}
-    {% block nav %} {{ super() }} {% endblock %}
-    <p>This site was created by <em>Henri Nurmi, Nicolas Kyejo, and Petri Kölhi</em> as an innovation project for the course
-        <em style="color:#3498DB">"Innovation Project XX00BH18-3282"</em> in Metropolia University of Applied Sciences during the autumn semester of 2019.</p>
 
-<p>The aim of the project was to create a web app to guide students during their orientation week at school. For further information or bug reports
-        please email any of the authors above <em style="color:#3498DB">(firstname.lastname@metropolia.fi)</em>.</p>
-{% endblock %}
+
+    {% block title %}About{% endblock %}
+    {% block body %}
+    {% block nav %} {{ super() }} {% endblock %}
+
+    <div class="container">
+
+        <h3>About:</h3>
+
+        <p>
+            This site was created by <em>Henri Nurmi, Nicolas Kyejo, and Petri Kölhi</em> as an innovation project for the course
+            <em style="color:#3498DB">"Innovation Project XX00BH18-3282"</em> in Metropolia University of Applied Sciences during the autumn semester of 2019.
+        </p>
+
+        <p>
+            The aim of the project was to create a web app to guide students during their orientation week at school. For further information or bug reports
+            please email any of the authors above <em style="color:#3498DB">(firstname.lastname@metropolia.fi)</em>.
+        </p>
+
+    </div>
+
+    {% endblock %}

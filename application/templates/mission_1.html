@@ -1,12 +1,59 @@
 {%  extends "story.html" %}
 {% block title %}Mission 1{% endblock %}
 {% block body %}
+
+
+
     {% block nav %} {{ super() }} {% endblock %}
-{{ username }}
-<img src="https://robohash.org/{{username}}.png" width="32" height="32"> <br>
 
-   <h3>Content for mission 1</h3>
+    <div class="row">
 
-<a href={{ url_for('content_bp.mission_1') }}>Mission 1</a>
-<a href={{ url_for('content_bp.mission_2') }}>Mission 2</a>
+    <div class="col-lg-auto">
+            <div class="list-group">
+                <a href={{ url_for('content_bp.story') }} class="list-group-item list-group-item-action">
+                    Start
+                </a>
+                <a href="#" class="list-group-item list-group-item-action active">
+                    Mission 1
+                </a>
+                <a href={{ url_for('content_bp.mission_2') }} class="list-group-item list-group-item-action">
+                    Mission 2
+                </a>
+                <a href={{ url_for('content_bp.mission_2') }} class="list-group-item list-group-item-action disabled">
+                    Mission 3
+                </a>
+                <a href={{ url_for('content_bp.mission_2') }} class="list-group-item list-group-item-action disabled">
+                    Mission 4
+                </a>
+                <a href={{ url_for('content_bp.mission_2') }} class="list-group-item list-group-item-action disabled">
+                    Mission 5
+                </a>
+                <a href={{ url_for('content_bp.mission_2') }} class="list-group-item list-group-item-action disabled">
+                    Mission 6
+                </a>
+                <a href={{ url_for('content_bp.mission_2') }} class="list-group-item list-group-item-action disabled">
+                    Mission 7
+                </a>
+            </div>
+        </div>
+
+
+    <div class="col-lg-8">
+
+
+                <h4>{{ username }}</h4>
+                <img id="robohash" src="https://robohash.org/{{username}}.png" style="width:100px; height:100px; display:block;"> <br>
+
+                    <p>
+                        Mission 1 content blablabal
+                    </p>
+
+    </div>
+
+
+    {% block leaderboard %} {{ super() }} {% endblock %}
+
+    </div>
+
+
 {% endblock %}
