@@ -34,6 +34,8 @@ def register():
                 db.session.add(user)
                 db.session.commit()
                 login_user(user)
+                session['points'] = 0
+                session['missions'] = {0: False, 1: False, 2: False}
                 session['username'] = username
                 return redirect(url_for('content_bp.story'))
 
@@ -54,6 +56,8 @@ def login():
                 for valid_user in user:
                     if check_password_hash(valid_user.password, password):
                         login_user(valid_user)
+                        session['points'] = 0
+                        session['missions'] = {0: False, 1: False, 2: False}
                         session['username'] = username
                         next = request.args.get('next')
                         return redirect(next or url_for('content_bp.story'))
@@ -62,6 +66,11 @@ def login():
         flash('Invalid Username/Password combination')
         return redirect(url_for('auth_bp.login'))
     return render_template('login_new.html', form=login_form)
+
+
+@auth_bp.route('/cookie-policy', methods=['GET'])
+def cookie():
+    return render_template('cookie_policy.html')
 
 
 @auth_bp.route('/logout')

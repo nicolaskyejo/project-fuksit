@@ -1,13 +1,41 @@
 {%  extends "story.html" %}
 {% block title %}Mission 2{% endblock %}
+{% block head %}{{ super() }}{% endblock %}
 {% block body %}
     {% block nav %} {{ super() }} {% endblock %}
 {{ username }}
-<img src="https://robohash.org/{{username}}.png" width="32" height="32"> <br>
+<img id="robohash" src="https://robohash.org/{{username}}.png" width="32" height="32"> <br>
+XP: <p id="points">{{ xp }}</p>
 
    <h3>Content for mission 2</h3>
 
+   <button type="button" class="btn btn-success" id="points_button">Bravo Mission Complete!</button><br>
 <a href={{ url_for('content_bp.mission_1') }}>Mission 1</a>
 <a href={{ url_for('content_bp.mission_2') }}>Mission 2</a>
 <a href="#">Mission 3</a>
+<script>
+    $('#points_button').click(function () {
+
+        $.ajax({
+           data:JSON.stringify({points:1,mission:2}),
+           url: "/points",
+           type: "POST",
+           contentType: "application/json",
+           dataType: "json",
+           processData: false,
+           success:function(result) {
+                console.log('POST success')
+                console.log(result.message)
+                setTimeout(function (){
+                    window.location = '#'
+                }, 700);
+           },
+           error: function (error) {
+                console.log('POST fail')
+           }
+        })
+    }
+
+    );
+</script>
 {% endblock %}

@@ -1,5 +1,6 @@
 {%  extends "base.html" %}
 {% block title %}404{% endblock %}
+{% block body %}
 <style>
 #error {
   background-color: black;
@@ -9,4 +10,5 @@
 }
 </style>
 <h1 id="error">This is not the page you are looking for</h1>
-
+<a href="{{ url_for('content_bp.story') }}">Return to home page</a>
+{% endblock %}
