@@ -1,3 +1,4 @@
+import redis
 from flask import Blueprint, render_template, flash, url_for, redirect, request, session
 from flask_login import login_required, current_user, logout_user, login_user
 from application import login_manager
@@ -6,6 +7,8 @@ from .models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth_bp = Blueprint('auth_bp', __name__)
+conn = redis.Redis('localhost')
+leader_board = 'leaderboard'
 
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
@@ -62,6 +65,7 @@ def cookie():
 @login_required
 def logout():
     logout_user()
+    conn.zrem(leader_board, session['username'])  # remove username from leaderboard
     session.pop('username', None)
     return redirect(url_for('auth_bp.login'))
 

@@ -1,8 +1,11 @@
+import redis
 from flask import Blueprint, render_template, flash, url_for, redirect, request, make_response, session, jsonify
 from flask_login import login_required, current_user
 
 
 content_bp = Blueprint('content_bp', __name__)
+conn = redis.Redis('localhost', 6379, charset='utf-8', decode_responses=True)
+leader_board = 'leaderboard'
 
 
 @content_bp.route('/points', methods=['POST'])
@@ -11,27 +14,24 @@ def points():
     """Adds one point to user's cumulative points and returns a JSON response indicating success or failure"""
     if request.method == 'POST':
         r = request.get_json()
-        mission_number = r.get('mission')
-        if mission_number in session['missions']:
-            if not session['missions'][mission_number]:
+        mission_number = r.get('mission')  # Mission which was completed
+        if mission_number in session['missions']:  # If mission is valid
+            if not session['missions'][mission_number]:  # If mission has not been completed before
                 session['points'] = session.get('points') + 1
                 session['missions'][mission_number] = True
+                conn.zadd(leader_board, {session['username']: 1}, incr=True)  # updating our leaderboard with new points
                 return make_response(jsonify({'message': 'points received and updated'}), 200)
             return make_response(jsonify({'message': 'mission done'}), 200)
         return make_response(jsonify({'message': 'invalid mission'}), 200)
     return make_response(jsonify({'error': 'invalid request'}), 400)
 
 
-@content_bp.route('/leaderboard', methods=['GET', 'POST'])
+@content_bp.route('/leaderboard', methods=['GET'])
 @login_required
 def leaderboard():
-    """GET request returns sorted leaderboard
-    POST request changes leaderboard"""
-    if request.method == 'POST':
-        return jsonify()
-        # to be completed later
-
-    return jsonify()
+    """GET request returns sorted leaderboard"""
+    top_10 = conn.zrevrangebyscore(leader_board, 15, 1, start=0, num=10, withscores=True)
+    return jsonify(top_10)
 
 
 @content_bp.route('/story', methods=['GET'])
