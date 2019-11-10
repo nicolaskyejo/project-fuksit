@@ -1,23 +1,47 @@
 {%  extends "story.html" %}
-{% block title %}About{% endblock %}
+{% block title %}Profile{% endblock %}
+{% block head %}{% endblock %}
 {% block body %}
 
     {% block nav %} {{ super() }} {% endblock %}
 
-    <div class="container">
+<div class="container">
+    <div class="row">
+{#        <h3>{{ username }}</h3>#}
+        <div class="col-lg-3">
+        <img style=" width:240px; height:240px; display: block;"
+             src="https://robohash.org/{{username}}.png" alt="You are right now"> <br>
 
-        <h3>{{ username }}</h3>
-        <img style=" width:240px; height:240px; display: block;" src="https://robohash.org/{{username}}.png" alt="You are right now"> <br>
 
-        <p>Before turning into a robot, <i style="color:#F39C12">{{ username }}</i> used to be like</p>
+        </div>
+        <div class="col-lg-5">
+            <p>Before turning into a robot, <i style="color:#F39C12">{{ username }}</i> used to be like</p>
+            <img style=" width:200px; height:200px; display: block;" src="https://robohash.org/{{username}}?set=set5"
+                 alt="You in the past">
+        </div>
+        <div class="col-lg-4">
 
-        <img style=" width:140px; height:140px; display: block;" src="https://robohash.org/{{username}}?set=set5" alt="You in the past">
+        <p>{{xp * 100}} Total XP</p>
+        {% for mission in done %}
+{#            {% if loop.last and mission %}#}
+{#            <p>Special mission&nbsp;<span style="color:green">complete</span></p>#}
+{##}
+{#            {% elif loop.last and not mission %}#}
+{#            <p>Special mission&nbsp;<span style="color:indianred">not complete</span></p>#}
+{#            {% endif %}#}
+{#            {% else %}#}
+            {% if mission %}
+            <p>Mission {{ loop.index - 1 }}&nbsp;<span style="color:green">complete</span></p>
+            {% else %}
+            <p>Mission {{ loop.index - 1 }}&nbsp;<span style="color:indianred">not complete</span></p>
+            {% endif %}
+        {% endfor %}
 
-        <p>Points, XP, other stuff will come here will come here.</p>
+        </div>
 
     </div>
 
-
+</div>
 
 
 {% endblock %}

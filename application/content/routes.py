@@ -1,7 +1,7 @@
 import redis
-from flask import Blueprint, render_template, flash, url_for, redirect, request, make_response, session, jsonify
-from flask_login import login_required, current_user
-
+from flask import Blueprint, render_template, request, make_response, session, jsonify
+from flask_login import login_required
+from application.landing_page.forms import Quiz
 
 content_bp = Blueprint('content_bp', __name__)
 conn = redis.Redis('localhost', 6379, charset='utf-8', decode_responses=True)
@@ -38,7 +38,7 @@ def leaderboard():
 @login_required
 def story():
     """The story and avatar"""
-    return render_template('story.html', username=session['username'], xp=session.get('points'))
+    return render_template('story.html', username=session['username'][:12], xp=session.get('points'))
 
 
 @content_bp.route('/about', methods=['GET'])
@@ -50,7 +50,8 @@ def about():
 @content_bp.route("/profile")
 @login_required
 def profile():
-    return render_template('profile.html', username=session['username'])
+    return render_template('profile.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 # Missions aka Content #
@@ -58,14 +59,29 @@ def profile():
 @login_required
 def mission_1():
     """Mission 1 and its contents"""
-    return render_template('mission_1.html', username=session['username'], xp=session.get('points'))
+    return render_template('mission_1.html', username=session['username'][:12], xp=session.get('points'))
 
 
 @content_bp.route('/mission_2', methods=['GET', 'POST'])
 @login_required
 def mission_2():
     """Mission 2 and its contents"""
-    return render_template('mission_2.html', username=session['username'], xp=session.get('points'))
+    return render_template('mission_2.html', username=session['username'][:12], xp=session.get('points'))
 
+
+@content_bp.route('/sidemission', methods=['GET', 'POST'])
+@login_required
+def quiz():
+    """Quiz route aka side mission"""
+    form = Quiz()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            if not session['missions']['special']:  # If mission has not been completed before
+                session['points'] = session.get('points') + 6
+                session['missions']['special'] = True
+                conn.zadd(leader_board, {session['username']: 6}, incr=True)
+            return render_template('success.html', username=session['username'], xp=session.get('points'))
+
+    return render_template('quiz.html', form=form, username=session['username'][:12], xp=session.get('points'))
 
 

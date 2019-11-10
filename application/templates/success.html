@@ -1,0 +1,44 @@
+{%  extends "story.html" %}
+
+
+{% block title %}About{% endblock %}
+{% block head %}<script>
+  // https://developers.google.com/youtube/player_parameters
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "http://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '360',
+      width: '640',
+      videoId: 'VoAfb3f04mo',
+      autoplay: '1'
+    });
+  }
+</script>{% endblock %}
+{% block body %}
+{% block nav %} {{ super() }} {% endblock %}
+
+    <div class="container">
+
+        <h3>Congrats!</h3>
+        <p>
+            You did it! You were able to lead <span style="color:orange">{{ username }}</span> to the end!
+            You finished with <span style="color:lightblue">{{ xp * 100 }}</span> experience points!
+        </p>
+        <p>
+            Next week is when your studies start, keep your head up and remember to have fun!
+        </p>
+<div id="ytplayer"></div><br>
+    <a href="{{ url_for('content_bp.story') }}">Return to home page</a>
+    </div>
+
+{% endblock %}
+
+
