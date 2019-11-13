@@ -5,6 +5,8 @@ from application import login_manager
 from .forms import LoginForm, SignupForm
 from .models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import escape
+
 
 auth_bp = Blueprint('auth_bp', __name__)
 conn = redis.Redis('localhost')
@@ -17,6 +19,10 @@ def register():
     if request.method == 'POST':
         if signup_form.validate():
             username = request.form.get('username')
+            escaped_username = escape(username)
+            if username != escaped_username:
+                flash('Invalid characters detected')
+                return redirect(url_for('auth_bp.register'))
             password = request.form.get('password')
             existing_user = User.query.filter_by(username=username).first()
             if existing_user is None:  # if no users are found, this is a new user

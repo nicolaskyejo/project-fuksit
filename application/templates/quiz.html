@@ -49,7 +49,7 @@
         {{ form.hidden_tag() }}
 {{ form.q1.label }}
           {{ form.q1 }}
-          <div class="alert-danger">
+          <div class="text-warning">
             {% for message in form.q1.errors %}
               <p>{{ message }}</p>
             {% endfor %}
@@ -57,74 +57,68 @@
 
 {{ form.q2.label }}
           {{ form.q2 }}
-          <div class="alert-danger">
+          <div class="text-warning">
             {% for message in form.q2.errors %}
               <p>{{ message }}</p>
             {% endfor %}
           </div>
 {{ form.q3.label }}
           {{ form.q3 }}
-          <div class="alert-danger">
+          <div class="text-warning">
             {% for message in form.q3.errors %}
               <p>{{ message }}</p>
             {% endfor %}
           </div>
-{#{{ form.q4.label }}#}
-{#          {{ form.q4 }}#}
-{#          <div class="alert-danger">#}
-{#            {% for message in form.q4.errors %}#}
-{#              <p>{{ message }}</p>#}
-{#            {% endfor %}#}
-{#          </div>#}
-{#{{ form.q5.label }}#}
-{#          {{ form.q5 }}#}
-{#          <div class="alert-danger">#}
-{#            {% for message in form.q5.errors %}#}
-{#              <p>{{ message }}</p>#}
-{#            {% endfor %}#}
-{#          </div>#}
-{#{{ form.q6.label }}#}
-{#          {{ form.q6 }}#}
-{#          <div class="alert-danger">#}
-{#            {% for message in form.q6.errors %}#}
-{#              <p>{{ message }}</p>#}
-{#            {% endfor %}#}
-{#          </div>#}
-{#{{ form.q7.label }}#}
-{#          {{ form.q7 }}#}
-{#          <div class="alert-danger">#}
-{#            {% for message in form.q7.errors %}#}
-{#              <p>{{ message }}</p>#}
-{#            {% endfor %}#}
-{#          </div>#}
-{#{{ form.q8.label }}#}
-{#          {{ form.q8 }}#}
-{#          <div class="alert-danger">#}
-{#            {% for message in form.q8.errors %}#}
-{#              <p>{{ message }}</p>#}
-{#            {% endfor %}#}
-{#          </div>#}
-{#{{ form.q9.label }}#}
-{#          {{ form.q9 }}#}
-{#          <div class="alert-danger">#}
-{#            {% for message in form.q9.errors %}#}
-{#              <p>{{ message }}</p>#}
-{#            {% endfor %}#}
-{#          </div>#}
-{#{{ form.q10.label }}#}
-{#          {{ form.q10 }}#}
-{#          <div class="alert-danger">#}
-{#            {% for message in form.q10.errors %}#}
-{#              <p>{{ message }}</p>#}
-{#            {% endfor %}#}
-{#          </div>#}
-{{ form.q11.label }}
-          {{ form.q11 }}
-          <div class="alert-danger">
-            {% for message in form.q11.errors %}
+{{ form.q4.label }}
+          {{ form.q4 }}
+          <div class="text-warning">
+            {% for message in form.q4.errors %}
               <p>{{ message }}</p>
             {% endfor %}
           </div>
+{{ form.q5.label }}
+          {{ form.q5 }}
+          <div class="text-warning">
+            {% for message in form.q5.errors %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+{{ form.q6.label }}
+          {{ form.q6 }}
+          <div class="text-warning">
+            {% for message in form.q6.errors %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+{{ form.q7.label }}
+          {{ form.q7 }}
+          <div class="text-warning">
+            {% for message in form.q7.errors %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+{{ form.q8.label }}
+          {{ form.q8 }}
+          <div class="text-warning">
+            {% for message in form.q8.errors %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+{{ form.q9.label }}
+          {{ form.q9 }}
+          <div class="text-warning">
+            {% for message in form.q9.errors %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+{{ form.q10.label }}
+          {{ form.q10 }}
+          <div class="text-warning">
+            {% for message in form.q10.errors %}
+              <p>{{ message }}</p>
+            {% endfor %}
+          </div>
+
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-warning") }}
         </div>

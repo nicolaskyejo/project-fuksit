@@ -22,7 +22,6 @@ $(document).ready(function() {
                     $('#leaderboard > tbody').append('<tr class="table-active"><th scope="row">' + (i+1) + '</th>' +
                         '<td>' + username[0] + '</td><td>' + username[1] * 100 + '</td></tr>');
                 });
-
            },
            error: function (error) {
                 console.log('Leaderboard GET fail')

@@ -1,7 +1,8 @@
 import redis
-from flask import Blueprint, render_template, request, make_response, session, jsonify
+from flask import Blueprint, render_template, request, make_response, session, jsonify, redirect, url_for
 from flask_login import login_required
 from application.landing_page.forms import Quiz
+
 
 content_bp = Blueprint('content_bp', __name__)
 conn = redis.Redis('localhost', 6379, charset='utf-8', decode_responses=True)
@@ -80,8 +81,15 @@ def quiz():
                 session['points'] = session.get('points') + 6
                 session['missions']['special'] = True
                 conn.zadd(leader_board, {session['username']: 6}, incr=True)
-            return render_template('success.html', username=session['username'], xp=session.get('points'))
+            if session['points'] >= 10:
+                return render_template('success.html', username=session['username'], xp=session.get('points'))
+            return redirect(url_for('content_bp.profile'))
 
     return render_template('quiz.html', form=form, username=session['username'][:12], xp=session.get('points'))
 
 
+@content_bp.route('/links', methods=['GET'])
+@login_required
+def links():
+    """Just some extra links for additional reading"""
+    return render_template('extra_read_allaboutit.html')
