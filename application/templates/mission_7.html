@@ -1,0 +1,95 @@
+{%  extends "story.html" %}
+{% block title %}Mission 7{% endblock %}
+{% block head %}{{ super() }}{% endblock %}
+{% block body %}
+
+    {% block nav %} {{ super() }} {% endblock %}
+
+    <div class="row">
+
+    <div class="col-lg-auto">
+            <div class="list-group">
+                <a href="{{ url_for('content_bp.story') }}" class="list-group-item list-group-item-action">
+                    Start
+                </a>
+                <a href="{{ url_for('content_bp.mission_1') }}" class="list-group-item list-group-item-action">
+                    Mission 1
+                </a>
+                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action">
+                    Mission 2
+                </a>
+                <a href="{{ url_for('content_bp.mission_3') }}" class="list-group-item list-group-item-action">
+                    Mission 3
+                </a>
+                <a href="{{ url_for('content_bp.mission_4') }}" class="list-group-item list-group-item-action">
+                    Mission 4
+                </a>
+                <a href="{{ url_for('content_bp.mission_5') }}" class="list-group-item list-group-item-action">
+                    Mission 5
+                </a>
+                <a href="{{ url_for('content_bp.mission_6') }}" class="list-group-item list-group-item-action">
+                    Mission 6
+                </a>
+                <a href="#" class="list-group-item list-group-item-action active">
+                    Mission 7
+                </a>
+            </div>
+        </div>
+
+    <div class="col-lg-6">
+
+<h2>Student’s Survival Guide</h2>
+<p>This guide is something that you should bookmark immediately.
+    It has listed the most important links that you are going to need and has guides for printing services, healthcare, library services and much more.
+    Once your Google and Microsoft accounts have been activated, you can download office for your computer along with a plethora of other useful
+    and awesome software available from mcp.metropolia.fi</p>
+<p>For your last mission, go through the <a href="https://wiki.metropolia.fi/display/itservices/Student%27s+Survival+Guide+-+E-Services+in+Metropolia">Survival Guide</a>
+    and bookmark it for later usage. Once done, mark the last mission as complete </p>
+
+        <button type="button" class="btn btn-success" id="points_button">Golf Mission Complete!</button><br>
+    </div>
+    <div class="col-sm-1">
+        <h4 style="color:#F39C12">{{ username }}</h4>
+        <img id="robohash" src="https://robohash.org/{{username}}.png" style="width:100px; height:100px; display:none;">
+    </div>
+    <div class="col-sm-1">
+        <h4>XP <br></h4>
+        <p id="points">{{ xp }}</p>
+        Story progress
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 85.8%;" aria-valuenow="85.8" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+
+    {% block leaderboard %} {{ super() }} {% endblock %}
+
+    </div>
+
+<script>
+    $('#points_button').click(function () {
+
+        $.ajax({
+           data:JSON.stringify({points:1,mission:7}),
+           url: "/points",
+           type: "POST",
+           contentType: "application/json",
+           dataType: "json",
+           processData: false,
+           success:function(result) {
+                console.log('POST success');
+                console.log(result.message);
+                setTimeout(function (){
+                    window.location = '{{ url_for('content_bp.quiz') }}'
+                }, 700);
+           },
+           error: function (error) {
+                console.log('POST fail')
+           }
+        })
+    }
+
+    );
+</script>
+
+{% endblock %}

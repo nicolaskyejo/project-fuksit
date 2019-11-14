@@ -32,7 +32,7 @@ def register():
                 login_user(user)
                 session['points'] = 0
                 session['missions'] = {0: False, 1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False,
-                                       8: False, 'special': False}
+                                        'special': False}
                 session['username'] = username
                 return redirect(url_for('content_bp.story'))
             flash('Username taken')
@@ -55,7 +55,7 @@ def login():
                     login_user(user)
                     session['points'] = 0
                     session['missions'] = {0: False, 1: False, 2: False, 3: False, 4: False, 5: False, 6: False,
-                                           7: False, 8: False, 'special': False}
+                                           7: False, 'special': False}
                     session['username'] = username
                     next = request.args.get('next')
                     return redirect(next or url_for('content_bp.story'))

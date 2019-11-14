@@ -1,10 +1,9 @@
 {%  extends "story.html" %}
-{% block title %}Mission 1{% endblock %}
+{% block title %}Mission 5{% endblock %}
 {% block head %}{{ super() }}{% endblock %}
 {% block body %}
 
     {% block nav %} {{ super() }} {% endblock %}
-
 
     <div class="row">
 
@@ -13,19 +12,19 @@
                 <a href="{{ url_for('content_bp.story') }}" class="list-group-item list-group-item-action">
                     Start
                 </a>
-                <a href="#" class="list-group-item list-group-item-action active">
+                <a href="{{ url_for('content_bp.mission_1') }}" class="list-group-item list-group-item-action">
                     Mission 1
                 </a>
-                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action disabled">
+                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action">
                     Mission 2
                 </a>
-                <a href="{{ url_for('content_bp.mission_3') }}" class="list-group-item list-group-item-action disabled">
+                <a href="{{ url_for('content_bp.mission_3') }}" class="list-group-item list-group-item-action">
                     Mission 3
                 </a>
-                <a href="{{ url_for('content_bp.mission_4') }}" class="list-group-item list-group-item-action disabled">
+                <a href="{{ url_for('content_bp.mission_4') }}" class="list-group-item list-group-item-action">
                     Mission 4
                 </a>
-                <a href="{{ url_for('content_bp.mission_5') }}" class="list-group-item list-group-item-action disabled">
+                <a href="#" class="list-group-item list-group-item-action active">
                     Mission 5
                 </a>
                 <a href="{{ url_for('content_bp.mission_6') }}" class="list-group-item list-group-item-action disabled">
@@ -37,22 +36,18 @@
             </div>
         </div>
 
-
     <div class="col-lg-6">
 
-
-    <h2>Downloading Tuudo </h2>
-    <p>Start by downloading the Tuudo-application to your phone: <a href="https://www.tuudo.fi/">Tuudo</a>.
-        From here you can access your student card, with which you are eligible for KELA-meal and public transport discounts.
-        Furthermore, you can find your schedule, student meal menus, study credits and lots more useful information.
-        Use some time to familiarise yourself with the application.</p>
-
-        <h2>Navigation to Oma </h2>
-        <p>Next head on into OMA at: <a href="https://oma.metropolia.fi">OMA</a> and use your Metropolia account to sign in.
-            OMA is the hub for everything important so make sure to save it into your bookmarks.
-            Once you have managed to log in, you can mark this part as complete. </p>
-
-        <button type="button" class="btn btn-success" id="points_button">Alpha Mission Complete!</button><br>
+<h2>Activate Metropolia Google and Office users</h2>
+<p>Navigate yourself to: <a href=" https://tietohallinto.metropolia.fi/display/itservices/Cloud+services">Cloud services</a>.
+    Here you need to accept the terms of use for both your Google and Microsoft office accounts.
+    These go through things that you are not allowed to do with your account and it’s really important that you actually go through them.
+    Once you have read through the terms and accepted them, you will have to wait for two hours or more for your accounts to be activated.
+    Instead of waiting for that, mark yourself complete. </p>
+<p> </p>
+<img src="{{ url_for('static', filename='img/cloud1.png') }}" >
+<p> </p>
+        <button type="button" class="btn btn-success" id="points_button">Echo Mission Complete!</button><br>
     </div>
     <div class="col-sm-1">
         <h4 style="color:#F39C12">{{ username }}</h4>
@@ -61,9 +56,9 @@
     <div class="col-sm-1">
         <h4>XP <br></h4>
         <p id="points">{{ xp }}</p>
-         Story progress
-         <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        Story progress
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 57.2%;" aria-valuenow="57.2" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
 
@@ -76,7 +71,7 @@
     $('#points_button').click(function () {
 
         $.ajax({
-           data:JSON.stringify({points:1,mission:1}),
+           data:JSON.stringify({points:1,mission:5}),
            url: "/points",
            type: "POST",
            contentType: "application/json",
@@ -86,7 +81,7 @@
                 console.log('POST success');
                 console.log(result.message);
                 setTimeout(function (){
-                    window.location = '{{ url_for('content_bp.mission_2') }}'
+                    window.location = '{{ url_for('content_bp.mission_6') }}'
                 }, 700);
            },
            error: function (error) {
@@ -97,4 +92,5 @@
 
     );
 </script>
+
 {% endblock %}

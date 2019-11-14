@@ -1,0 +1,103 @@
+{%  extends "story.html" %}
+{% block title %}Mission 6{% endblock %}
+{% block head %}{{ super() }}{% endblock %}
+{% block body %}
+
+    {% block nav %} {{ super() }} {% endblock %}
+
+    <div class="row">
+
+    <div class="col-lg-auto">
+            <div class="list-group">
+                <a href="{{ url_for('content_bp.story') }}" class="list-group-item list-group-item-action">
+                    Start
+                </a>
+                <a href="{{ url_for('content_bp.mission_1') }}" class="list-group-item list-group-item-action">
+                    Mission 1
+                </a>
+                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action">
+                    Mission 2
+                </a>
+                <a href="{{ url_for('content_bp.mission_3') }}" class="list-group-item list-group-item-action">
+                    Mission 3
+                </a>
+                <a href="{{ url_for('content_bp.mission_4') }}" class="list-group-item list-group-item-action">
+                    Mission 4
+                </a>
+                <a href="{{ url_for('content_bp.mission_5') }}" class="list-group-item list-group-item-action">
+                    Mission 5
+                </a>
+                <a href="#" class="list-group-item list-group-item-action active">
+                    Mission 6
+                </a>
+                <a href="{{ url_for('content_bp.mission_7') }}" class="list-group-item list-group-item-action disabled">
+                    Mission 7
+                </a>
+            </div>
+        </div>
+
+    <div class="col-lg-6">
+
+<h2>Outlook signature</h2>
+<p>You can always contact your teachers and other school personnel through email, but it is important that they know exactly who is trying to contact them.
+    That is why your next mission is to do something about that.
+    Navigate to your school outlook from the OMA navigation bar or by going to <a href="https://https://mail.metropolia.fi/">mail.metropolia.fi</a></p>
+<p>From there follow the path: Options -> Layout -> Email Signature </p>
+<p> </p>
+<p>Check both of the boxes and fill the box with your information following this format: </p>
+<p>-------------------------------------------------------------</p>
+<p><strong>Matti Meikäläinen</strong></p>
+<p><strong>Tieto-ja viestintätekniikan tutkinto-ohjelma</strong></p>
+<p><strong>group-id ie. TXK19S1-A</strong></p>
+<p><strong>student number</strong></p>
+<p><strong>phonenumber</strong></p>
+<p>-------------------------------------------------------------</p>
+<p>Make sure that is it working by writing a new email and then mark yourself complete.</p>
+
+        <button type="button" class="btn btn-success" id="points_button">Foxtrot Mission Complete!</button><br>
+    </div>
+    <div class="col-sm-1">
+        <h4 style="color:#F39C12">{{ username }}</h4>
+        <img id="robohash" src="https://robohash.org/{{username}}.png" style="width:100px; height:100px; display:none;">
+    </div>
+    <div class="col-sm-1">
+        <h4>XP <br></h4>
+        <p id="points">{{ xp }}</p>
+        Story progress
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 71.5%;" aria-valuenow="71.5" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+
+    {% block leaderboard %} {{ super() }} {% endblock %}
+
+    </div>
+
+<script>
+    $('#points_button').click(function () {
+
+        $.ajax({
+           data:JSON.stringify({points:1,mission:6}),
+           url: "/points",
+           type: "POST",
+           contentType: "application/json",
+           dataType: "json",
+           processData: false,
+           success:function(result) {
+                console.log('POST success');
+                console.log(result.message);
+                setTimeout(function (){
+                    window.location = '{{ url_for('content_bp.mission_7') }}'
+                }, 700);
+           },
+           error: function (error) {
+                console.log('POST fail')
+           }
+        })
+    }
+
+    );
+</script>
+
+{% endblock %}
