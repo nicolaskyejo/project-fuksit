@@ -19,7 +19,7 @@
             <img style=" width:200px; height:200px; display: block;" src="https://robohash.org/{{username}}?set=set5"
                  alt="You in the past">
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
 
         <p>{{xp * 100}} Total XP</p>
         {% for mission in done %}
@@ -37,6 +37,12 @@
             {% endif %}
         {% endfor %}
 
+        </div>
+        <div class="col-lg-1">
+        <h5>Achievements</h5>
+            {% if badge %}
+                <span class="badge badge-primary">Completionist</span>
+            {% endif %}
         </div>
 
     </div>

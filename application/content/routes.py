@@ -3,7 +3,6 @@ from flask import Blueprint, render_template, request, make_response, session, j
 from flask_login import login_required
 from application.landing_page.forms import Quiz
 
-
 content_bp = Blueprint('content_bp', __name__)
 conn = redis.Redis('localhost', 6379, charset='utf-8', decode_responses=True)
 leader_board = 'leaderboard'
@@ -48,11 +47,15 @@ def about():
     return render_template('about.html')
 
 
-@content_bp.route("/profile")
+@content_bp.route("/profile", methods=['GET'])
 @login_required
 def profile():
+    done = session['missions'].values()
+    if False in done:
+        return render_template('profile.html', username=session['username'][:12], xp=session.get('points'),
+                               done=done)
     return render_template('profile.html', username=session['username'][:12], xp=session.get('points'),
-                           done=session['missions'].values())
+                           done=done, badge=True)
 
 
 # Missions aka Content #
@@ -69,11 +72,13 @@ def mission_2():
     """Mission 2 and its contents"""
     return render_template('mission_2.html', username=session['username'][:12], xp=session.get('points'))
 
+
 @content_bp.route('/mission_3', methods=['GET', 'POST'])
 @login_required
 def mission_3():
     """Mission 3 and its contents"""
     return render_template('mission_3.html', username=session['username'][:12], xp=session.get('points'))
+
 
 @content_bp.route('/mission_4', methods=['GET', 'POST'])
 @login_required
@@ -81,11 +86,13 @@ def mission_4():
     """Mission 4 and its contents"""
     return render_template('mission_4.html', username=session['username'][:12], xp=session.get('points'))
 
+
 @content_bp.route('/mission_5', methods=['GET', 'POST'])
 @login_required
 def mission_5():
     """Mission 5 and its contents"""
     return render_template('mission_5.html', username=session['username'][:12], xp=session.get('points'))
+
 
 @content_bp.route('/mission_6', methods=['GET', 'POST'])
 @login_required
@@ -93,11 +100,13 @@ def mission_6():
     """Mission 6 and its contents"""
     return render_template('mission_6.html', username=session['username'][:12], xp=session.get('points'))
 
+
 @content_bp.route('/mission_7', methods=['GET', 'POST'])
 @login_required
 def mission_7():
     """Mission 7 and its contents"""
     return render_template('mission_7.html', username=session['username'][:12], xp=session.get('points'))
+
 
 @content_bp.route('/sidemission', methods=['GET', 'POST'])
 @login_required
