@@ -9,30 +9,30 @@
 
     <div class="col-lg-auto">
             <div class="list-group">
-                <a href="{{ url_for('content_bp.story') }}" class="list-group-item list-group-item-action">
-                    Start
-                </a>
-                <a href="{{ url_for('content_bp.mission_1') }}" class="list-group-item list-group-item-action">
-                    Mission 1
-                </a>
-                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action">
-                    Mission 2
-                </a>
-                <a href="{{ url_for('content_bp.mission_3') }}" class="list-group-item list-group-item-action">
-                    Mission 3
-                </a>
-                <a href="{{ url_for('content_bp.mission_4') }}" class="list-group-item list-group-item-action">
-                    Mission 4
-                </a>
-                <a href="{{ url_for('content_bp.mission_5') }}" class="list-group-item list-group-item-action">
-                    Mission 5
-                </a>
-                <a href="#" class="list-group-item list-group-item-action active">
-                    Mission 6
-                </a>
-                <a href="{{ url_for('content_bp.mission_7') }}" class="list-group-item list-group-item-action disabled">
-                    Mission 7
-                </a>
+        {% for mission in done %}
+            {% if mission %}
+                {% if loop.first %}
+                    <a href="{{ url_for('content_bp.story') }}" class="list-group-item list-group-item-action active">
+                    Start</a>
+                {% elif loop.last %}
+                    {# do nothing #}
+                {% else %}
+                <a href="{{ url_for('content_bp.mission_{0}'.format(loop.index - 1)) }}" class="list-group-item list-group-item-action active">
+                    Mission {{ loop.index - 1 }}</a>
+                {% endif %}
+
+            {% else %}
+                {% if loop.first %}
+                    <a href="{{ url_for('content_bp.story') }}" class="list-group-item list-group-item-action disabled">
+                    Start</a>
+                {% elif loop.last %}
+                    {# do nothing #}
+                {% else %}
+                <a href="{{ url_for('content_bp.mission_{0}'.format(loop.index - 1)) }}" class="list-group-item list-group-item-action disabled">
+                    Mission {{ loop.index - 1 }}</a>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
             </div>
         </div>
 

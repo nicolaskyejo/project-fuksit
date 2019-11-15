@@ -38,7 +38,8 @@ def leaderboard():
 @login_required
 def story():
     """The story and avatar"""
-    return render_template('story.html', username=session['username'][:12], xp=session.get('points'))
+    return render_template('story.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/about', methods=['GET'])
@@ -50,12 +51,12 @@ def about():
 @content_bp.route("/profile", methods=['GET'])
 @login_required
 def profile():
-    done = session['missions'].values()
-    if False in done:
+    completed = session['missions'].values()
+    if False in completed:
         return render_template('profile.html', username=session['username'][:12], xp=session.get('points'),
-                               done=done)
+                               done=completed)
     return render_template('profile.html', username=session['username'][:12], xp=session.get('points'),
-                           done=done, badge=True)
+                           done=completed, badge=True)
 
 
 # Missions aka Content #
@@ -63,49 +64,56 @@ def profile():
 @login_required
 def mission_1():
     """Mission 1 and its contents"""
-    return render_template('mission_1.html', username=session['username'][:12], xp=session.get('points'))
+    return render_template('mission_1.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/mission_2', methods=['GET', 'POST'])
 @login_required
 def mission_2():
     """Mission 2 and its contents"""
-    return render_template('mission_2.html', username=session['username'][:12], xp=session.get('points'))
+    return render_template('mission_2.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/mission_3', methods=['GET', 'POST'])
 @login_required
 def mission_3():
     """Mission 3 and its contents"""
-    return render_template('mission_3.html', username=session['username'][:12], xp=session.get('points'))
+    return render_template('mission_3.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/mission_4', methods=['GET', 'POST'])
 @login_required
 def mission_4():
     """Mission 4 and its contents"""
-    return render_template('mission_4.html', username=session['username'][:12], xp=session.get('points'))
+    return render_template('mission_4.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/mission_5', methods=['GET', 'POST'])
 @login_required
 def mission_5():
     """Mission 5 and its contents"""
-    return render_template('mission_5.html', username=session['username'][:12], xp=session.get('points'))
+    return render_template('mission_5.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/mission_6', methods=['GET', 'POST'])
 @login_required
 def mission_6():
     """Mission 6 and its contents"""
-    return render_template('mission_6.html', username=session['username'][:12], xp=session.get('points'))
+    return render_template('mission_6.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/mission_7', methods=['GET', 'POST'])
 @login_required
 def mission_7():
     """Mission 7 and its contents"""
-    return render_template('mission_7.html', username=session['username'][:12], xp=session.get('points'))
+    return render_template('mission_7.html', username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/sidemission', methods=['GET', 'POST'])
@@ -123,7 +131,8 @@ def quiz():
                 return render_template('success.html', username=session['username'], xp=session.get('points'))
             return redirect(url_for('content_bp.profile'))
 
-    return render_template('quiz.html', form=form, username=session['username'][:12], xp=session.get('points'))
+    return render_template('quiz.html', form=form, username=session['username'][:12], xp=session.get('points'),
+                           done=session['missions'].values())
 
 
 @content_bp.route('/links', methods=['GET'])

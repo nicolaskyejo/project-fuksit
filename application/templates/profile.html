@@ -23,13 +23,6 @@
 
         <p>{{xp * 100}} Total XP</p>
         {% for mission in done %}
-{#            {% if loop.last and mission %}#}
-{#            <p>Special mission&nbsp;<span style="color:green">complete</span></p>#}
-{##}
-{#            {% elif loop.last and not mission %}#}
-{#            <p>Special mission&nbsp;<span style="color:indianred">not complete</span></p>#}
-{#            {% endif %}#}
-{#            {% else %}#}
             {% if mission %}
             <p>Mission {{ loop.index - 1 }}&nbsp;<span style="color:green">complete</span></p>
             {% else %}
