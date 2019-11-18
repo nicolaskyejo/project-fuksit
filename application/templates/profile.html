@@ -1,7 +1,11 @@
 {%  extends "story.html" %}
 {% block title %}Profile{% endblock %}
-{% block head %}{% endblock %}
+{% block head %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/xpbar.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/xpbar.css') }}">
+{% endblock %}
 {% block body %}
+
 
     {% block nav %} {{ super() }} {% endblock %}
 
@@ -19,6 +23,9 @@
             <img style=" width:200px; height:200px; display: block;" src="https://robohash.org/{{username}}?set=set5"
                  alt="You in the past">
         </div>
+
+
+
         <div class="col-lg-3">
 
         <p>{{xp * 100}} Total XP</p>
@@ -40,7 +47,44 @@
 
     </div>
 
+        <div class="col-lg-12">
+            <div id='account-bar-wrapper' style="background: #222222;">
+                <div id='account-bar'>
+                    <div id='account-bar-name'>{{ username }}</div>
+                        <div id='account-bar-level'>Level 1</div>
+                            <div id='xp-bar'>
+                                <div id='xp-bar-fill'>
+                                    <div id='xp-increase-fx'>
+                                        <div id='xp-increase-fx-flicker'>
+                                            <div class='xp-increase-glow1'></div>
+                                            <div class='xp-increase-glow2'></div>
+                                            <div class='xp-increase-glow3'></div>
+                                        </div>
+                                        <div class='xp-increase-glow2'></div>
+                                    </div>
+                                </div>
+                            </div>
+                    <div id='account-bar-next-level'>2</div>
+                </div>
+            </div>
+        </div>
+
+
+
 </div>
 
+<script>
+
+function doit(){
+  $("#xp-increase-fx").css("display","inline-block");
+  $("#xp-bar-fill").css("box-shadow",/*"0px 0px 15px #06f,*/ "-5px 0px 10px #fff inset");
+  setTimeout(function(){$("#xp-bar-fill").css("-webkit-transition","all 2s ease");
+  $("#xp-bar-fill").css("width","{{ ((xp * 100)/1400) * 100 }}%");},100);
+  setTimeout(function(){$("#xp-increase-fx").fadeOut(500);$("#xp-bar-fill").css({"-webkit-transition":"all 0.5s ease","box-shadow":""});},2000);
+  //setTimeout(function(){$("#xp-bar-fill").css({"width":"0.1%"});},3000);
+}
+
+
+</script>
 
 {% endblock %}
