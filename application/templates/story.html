@@ -24,7 +24,7 @@
                   </li>
                 </ul>
                 <form action="{{ url_for('auth_bp.logout') }}">
-                  <button class="btn btn-danger disabled" type="submit">Logout</button>
+                  <button class="btn btn-danger disabled" id="logout" type="submit">Logout</button>
                 </form>
               </div>
             </nav>
@@ -36,30 +36,7 @@
 
         <div class="col-lg-auto">
             <div class="list-group">
-{#                <a href="#" class="list-group-item list-group-item-action active">#}
-{#                    Start#}
-{#                </a>#}
-{#                <a href="{{ url_for('content_bp.mission_1') }}" class="list-group-item list-group-item-action disabled">#}
-{#                    Mission 1#}
-{#                </a>#}
-{#                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action disabled">#}
-{#                    Mission 2#}
-{#                </a>#}
-{#                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action disabled">#}
-{#                    Mission 3#}
-{#                </a>#}
-{#                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action disabled">#}
-{#                    Mission 4#}
-{#                </a>#}
-{#                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action disabled">#}
-{#                    Mission 5#}
-{#                </a>#}
-{#                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action disabled">#}
-{#                    Mission 6#}
-{#                </a>#}
-{#                <a href="{{ url_for('content_bp.mission_2') }}" class="list-group-item list-group-item-action disabled">#}
-{#                    Mission 7#}
-{#                </a>#}
+
         {% for mission in done %}
             {% if mission %}
                 {% if loop.first %}
@@ -115,7 +92,7 @@
 
             <h2>Leaderboard</h2>
 
-{#            <ol id="leaderboard"></ol>#}
+
         <table class="table table-hover" id="leaderboard">
           <thead>
             <tr>

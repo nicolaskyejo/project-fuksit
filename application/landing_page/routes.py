@@ -32,7 +32,7 @@ def register():
                 login_user(user)
                 session['points'] = 0
                 session['missions'] = {0: False, 1: False, 2: False, 3: False, 4: False, 5: False, 6: False, 7: False,
-                                        'special': False}
+                                       'special': False}
                 session['username'] = username
                 return redirect(url_for('content_bp.story'))
             flash('Username taken')
@@ -91,4 +91,3 @@ def unauthorized():
     """Redirect unauthorized users to Login page."""
     flash('You must be logged in to view that page.')
     return redirect(url_for('auth_bp.login'))
-
