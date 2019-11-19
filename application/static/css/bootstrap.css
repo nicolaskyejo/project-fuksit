@@ -12,6 +12,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700,400italic");
+
 :root {
   --blue: #375a7f;
   --indigo: #6610f2;
@@ -3233,7 +3234,7 @@ input[type="button"].btn-block {
   opacity: 0;
 }
 
-.collapse:not(.show) {
+.collapse:not(.in) {
   display: none;
 }
 
@@ -10752,3 +10753,4 @@ a.text-dark:hover, a.text-dark:focus {
 .list-group-item-action .list-group-item-heading {
   color: #fff;
 }
+

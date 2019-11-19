@@ -6,13 +6,12 @@
 
 {% block body %}
     {% block nav %}
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-              <div class="collapse navbar-collapse" id="navbarColor02">
+              <div class="navbar-collapse collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item">
                     <a class="nav-link" href={{ url_for('content_bp.story') }}>Story</a>
@@ -24,11 +23,12 @@
                     <a class="nav-link" href={{ url_for('content_bp.about') }}>About</a>
                   </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" action="{{ url_for('auth_bp.logout') }}">
-                  <button class="btn btn-danger disabled" id="logout" type="submit">Logout</button>
+                <form action="{{ url_for('auth_bp.logout') }}">
+                  <button class="btn btn-danger disabled" type="submit">Logout</button>
                 </form>
               </div>
             </nav>
+
 
     {% endblock %}
 
