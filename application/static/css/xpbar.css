@@ -61,17 +61,17 @@
   text-align:right;
 }
 
-#doit-btn{
-  margin:100px 0px 0px 0px;
-}
+/*#doit-btn{*/
+/*  margin:100px 0px 0px 0px;*/
+/*}*/
 
-.btn{
-  display:inline-block;
-  padding:5px;
-  height:25px;
-  background:#000;
-  cursor:pointer;
-}
+/*.btn{*/
+/*  display:inline-block;*/
+/*  padding:5px;*/
+/*  height:25px;*/
+/*  background:#000;*/
+/*  cursor:pointer;*/
+/*}*/
 
 #xp-increase-fx{
   position:relative;
