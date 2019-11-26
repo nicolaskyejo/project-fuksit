@@ -4,7 +4,11 @@ A 'gamified' web-app for introducing first-year students to using the school sys
 
 ## Getting Started
 
-How to run the project locally.
+How to run the project locally. First clone this repository
+
+```
+git clone https://github.com/nicolaskyejo/project-fuksit.git
+```
 
 ### Prerequisites
 1. Python 3.6+
@@ -89,6 +93,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* https://github.com/wimagguc/jquery-eu-cookie-law-popup
-* https://github.com/mjhea0/thinkful-mentor/blob/master/python/flask-wtf-quiz/quiz_forms.py
-* https://codepen.io/AfroDev/pen/gbXWjQ
+* [Cookie warning](https://github.com/wimagguc/jquery-eu-cookie-law-popup)
+* [Quiz form layout](https://github.com/mjhea0/thinkful-mentor/blob/master/python/flask-wtf-quiz/quiz_forms.py)
+* [XP-bar animation](https://codepen.io/AfroDev/pen/gbXWjQ)
