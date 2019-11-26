@@ -79,6 +79,10 @@ Finally if every step worked without errors,
 python3 wsgi.py
 ```
 Open your favorite browser and navigate to '127.0.0.1:5000'
+
+## How it looks like
+<img src="collagesd.png" alt="Demo"/>
+
 ## Built With
 
 * [Flask](https://palletsprojects.com/p/flask/) - The web framework used

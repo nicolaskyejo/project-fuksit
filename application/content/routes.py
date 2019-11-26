@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, request, make_response, session, j
 from flask_login import login_required
 from application.landing_page.forms import Quiz
 
+
 content_bp = Blueprint('content_bp', __name__)
 conn = redis.Redis('localhost', 6379, charset='utf-8', decode_responses=True)
 leader_board = 'leaderboard'
@@ -29,7 +30,7 @@ def points():
 @content_bp.route('/leaderboard', methods=['GET'])
 @login_required
 def leaderboard():
-    """GET request returns sorted leaderboard"""
+    """Returns a sorted leaderboard in JSON format"""
     top_10 = conn.zrevrangebyscore(leader_board, 15, 1, start=0, num=10, withscores=True)
     return jsonify(top_10)
 
